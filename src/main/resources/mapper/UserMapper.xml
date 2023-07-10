@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codeking.mybatis_plus_demo.mapper.UserMapper">
+    <insert id="insertOrUpdateBatch">
+        INSERT INTO user(name,age,email) VALUES
+        <foreach collection='list' item='user' separator=','>
+        (#{user.name},#{user.age},#{user.email})
+        </foreach>  ON DUPLICATE KEY UPDATE name = VALUES(name)
+    </insert>
+
+
+    <!-- 定义查询语句 -->
+    <select id="getUserById" resultType="com.codeking.mybatis_plus_demo.entity.User">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+</mapper>

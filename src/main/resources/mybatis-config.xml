@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 顺序严格要求！！！
+       核心配置文件中的标签必须按照固定的顺序：
+        properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,objectWrapperFactory?,reflectorFactory?
+        ,plugins?,environments?,databaseIdProvider?,mappers?-->
+    <!--设置连接数据库的环境-->
+    <!--  引入配置文件  -->
+    <!--<properties resource="jdbc.properties"/>-->
+    <settings>
+        <!--  不建议打开，因为又的字段比较长 false是关闭      -->
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- 开启缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    <!--<typeAliases>-->
+    <!--    <package name="com.codeking.mybatis_plus_demo.entity"/>-->
+    <!--</typeAliases>-->
+    <plugins>
+        <!--设置分页插件-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
+
+    <!--引入映射文件-->
+    <mappers>
+        <!--以包为单位，将包下所有的映射文件引入核心配置文件注意：此方式必须保证mapper接口和mapper映射文件必须在相同的包下-->
+        <!--<mapper resource="com/codeking/mybatis_plus_demo/mappers/UserMapper.java"/>-->
+        <!--        <mapper resource="mappers/TestMapper.xml"/>-->
+        <!--<package name="com.codeking.mybatis_plus_demo.mapper"/>-->
+    </mappers>
+</configuration>

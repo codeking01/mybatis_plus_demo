@@ -3,10 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.codeking.mybatis_plus_demo.mapper.UserMapper">
     <insert id="insertOrUpdateBatch">
-        INSERT INTO user(name,age,email) VALUES
+        INSERT INTO user(age,user_name,email) VALUES
         <foreach collection='list' item='user' separator=','>
-        (#{user.name},#{user.age},#{user.email})
-        </foreach>  ON DUPLICATE KEY UPDATE name = VALUES(name)
+            (#{user.age},#{user.userName},#{user.email})
+        </foreach>
+        ON DUPLICATE KEY UPDATE age = VALUES(age), email=VALUES(email);
     </insert>
 
 

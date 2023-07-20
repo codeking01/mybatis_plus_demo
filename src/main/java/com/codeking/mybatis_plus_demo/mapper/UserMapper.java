@@ -11,11 +11,11 @@ import java.util.List;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
     /*@Insert("<script>" +
-            "INSERT INTO user(name,age,email) VALUES " +
+            "INSERT INTO user(userName,age,email) VALUES " +
             "<foreach collection='list' item='user' separator=','>" +
-            "(#{user.name},#{user.age},#{user.email})" +
+            "(#{user.userName},#{user.age},#{user.email})" +
             "</foreach> " +
-            "ON DUPLICATE KEY UPDATE name = VALUES(name)" +
+            "ON DUPLICATE KEY UPDATE userName = VALUES(userName)" +
             "</script>")*/
     void insertOrUpdateBatch(@Param("list") List<User> list);
     User getUserById(@Param("id") Long list);

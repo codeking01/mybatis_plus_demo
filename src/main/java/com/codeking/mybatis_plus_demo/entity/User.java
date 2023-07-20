@@ -1,7 +1,6 @@
 package com.codeking.mybatis_plus_demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -16,22 +15,22 @@ import lombok.Data;
 public class User {
     @TableId(value = "ID", type = IdType.AUTO)
     private Long id;
-    private String name;
+    private String userName;
     private Integer age;
     private String email;
 
     public User() {
     }
 
-    public User(String name, Integer age, String email) {
-        this.name = name;
+    public User(String userName, Integer age, String email) {
+        this.userName = userName;
         this.age = age;
         this.email = email;
     }
 
-    public User(Long id, String name, Integer age, String email) {
+    public User(Long id, String userName, Integer age, String email) {
         this.id = id;
-        this.name = name;
+        this.userName = userName;
         this.age = age;
         this.email = email;
     }

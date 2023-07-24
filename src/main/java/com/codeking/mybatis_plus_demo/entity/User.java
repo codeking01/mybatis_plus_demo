@@ -18,6 +18,15 @@ public class User {
     private String userName;
     private Integer age;
     private String email;
+    private Boolean opStatus;
+
+    public User(Long id, String userName, Integer age, String email, Boolean opStatus) {
+        this.id = id;
+        this.userName = userName;
+        this.age = age;
+        this.email = email;
+        this.opStatus = opStatus;
+    }
 
     public User() {
     }

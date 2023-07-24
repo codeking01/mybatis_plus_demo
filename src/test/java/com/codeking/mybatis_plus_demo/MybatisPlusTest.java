@@ -115,7 +115,11 @@ public class MybatisPlusTest {
         List<User> list = userMapper.selectList(queryWrapper);
         System.out.println("****");
         //todo list内容转化为json
-
         System.out.println(list);
+    }
+
+    @Test
+    public void testDeleteUser() {
+        userMapper.deleteUserByID(1L);
     }
 }

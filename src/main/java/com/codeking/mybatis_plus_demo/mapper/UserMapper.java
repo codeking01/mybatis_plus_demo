@@ -1,8 +1,8 @@
 package com.codeking.mybatis_plus_demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.codeking.mybatis_plus_demo.entity.User;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,5 +20,10 @@ public interface UserMapper extends BaseMapper<User> {
     void insertOrUpdateBatch(@Param("list") List<User> list);
     User getUserById(@Param("id") Long list);
 
-
+    default void deleteUserByID(@Param("id") Long id) {
+        User user = this.selectById(id);
+        user.setOpStatus(false);
+        //this.update(user, Wrappers.<User>lambdaUpdate().eq(User::getId,id));
+        this.updateById(user);
+    }
 }

@@ -18,12 +18,23 @@ public interface UserMapper extends BaseMapper<User> {
             "ON DUPLICATE KEY UPDATE userName = VALUES(userName)" +
             "</script>")*/
     void insertOrUpdateBatch(@Param("list") List<User> list);
+
     User getUserById(@Param("id") Long list);
 
-    default void deleteUserByID(@Param("id") Long id) {
+    default void deleteUserByID(@Param("Id") Long id) {
         User user = this.selectById(id);
         user.setOpStatus(false);
         //this.update(user, Wrappers.<User>lambdaUpdate().eq(User::getId,id));
         this.updateById(user);
     }
+
+    void deleteUserByUpdateID(Long id);
+
+
+    // 根据邮件去查看
+    default User getEmail(Integer email) {
+        return this.selectOne(Wrappers.<User>lambdaQuery()
+                .eq(User::getEmail, email));
+    }
+
 }

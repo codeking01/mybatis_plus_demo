@@ -2,6 +2,7 @@ package com.codeking.mybatis_plus_demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class User {
     private String userName;
     private Integer age;
     private String email;
+    @TableLogic(value = "1", delval = "0")
     private Boolean opStatus;
 
     public User(Long id, String userName, Integer age, String email, Boolean opStatus) {

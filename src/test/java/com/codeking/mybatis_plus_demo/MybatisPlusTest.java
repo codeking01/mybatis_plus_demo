@@ -2,6 +2,7 @@ package com.codeking.mybatis_plus_demo;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.codeking.mybatis_plus_demo.dto.userCommonDto;
 import com.codeking.mybatis_plus_demo.entity.NoDataResponse;
 import com.codeking.mybatis_plus_demo.entity.User;
 import com.codeking.mybatis_plus_demo.mapper.UserMapper;
@@ -9,9 +10,11 @@ import com.codeking.mybatis_plus_demo.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 public class MybatisPlusTest {
@@ -92,6 +95,12 @@ public class MybatisPlusTest {
         //System.out.println(userPage);
         //获取分页数据
         List<User> list = userPage.getRecords();
+        //List<String> collect = userPage.getRecords().stream().map(User::getUserName).collect(Collectors.toList());
+        List<String> collect = userPage.getRecords().stream().map(User::getUserName).collect(Collectors.toList());
+        for (String s : collect) {
+            System.out.println("value:" + s);
+        }
+        //System.out.println("**"+collect);
         list.forEach(System.out::println);
         //System.out.println("当前页："+page.getCurrent());
         //System.out.println("每页显示的条数："+page.getSize());
@@ -120,6 +129,40 @@ public class MybatisPlusTest {
 
     @Test
     public void testDeleteUser() {
-        userMapper.deleteUserByID(1L);
+        // 这个只能去写sql
+        userMapper.deleteUserByID(2L);
+    }
+
+    @Test
+    public void testDeleteUserByUpdate() {
+        userMapper.deleteUserByUpdateID(2L);
+    }
+
+
+    @Test
+    public void userCommonEntity() {
+        userCommonDto error = new userCommonDto(10, "error");
+        System.out.println(error);
+        userCommonDto build = userCommonDto.builder().build();
+        userCommonDto build1 = new userCommonDto();
+        System.out.println("***** :" + build);
+        if (build == null) {
+            System.out.println("空！");
+        }
+        if (ObjectUtils.isEmpty(build)) {
+            System.out.println("空 build comings");
+        }
+        if (ObjectUtils.isEmpty(build1)) {
+            System.out.println("空 build1 comings");
+        }
+        if (build1.getErrorCode() == null || build1.getErrorMessage() == null) {
+            System.out.println("空 build1 comings");
+        }
+    }
+
+    @Test
+    public void getEmail() {
+        User email = userMapper.getEmail(777);
+        System.out.println(email);
     }
 }

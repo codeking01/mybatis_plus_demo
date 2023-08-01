@@ -9,10 +9,17 @@
         </foreach>
         ON DUPLICATE KEY UPDATE age = VALUES(age), email=VALUES(email);
     </insert>
+    <delete id="deleteUserByUpdateID">
+        update user
+        set OP_STATUS=0
+        where ID = #{ID};
+    </delete>
 
 
     <!-- 定义查询语句 -->
     <select id="getUserById" resultType="com.codeking.mybatis_plus_demo.entity.User">
-        SELECT * FROM user WHERE id = #{id}
+        SELECT *
+        FROM user
+        WHERE id = #{id}
     </select>
 </mapper>
